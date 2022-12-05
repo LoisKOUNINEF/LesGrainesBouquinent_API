@@ -12,7 +12,6 @@ import * as bcrypt from 'bcrypt';
 import { IsEmail, MinLength } from 'class-validator';
 import { Book } from 'src/books/entities/book.entity';
 import { Comment } from 'src/comments/entities/comment.entity';
-import { Favorite } from 'src/favorites/entities/favorite.entity';
 
 @Entity()
 export class User {
@@ -56,12 +55,6 @@ export class User {
     cascade: true,
   })
   comments: Comment[];
-
-  @ApiProperty()
-  @OneToMany(() => Favorite, (favorite) => favorite.user, {
-    cascade: true,
-  })
-  favorites: Favorite[];
 
   @BeforeInsert()
   async hashPassword() {
