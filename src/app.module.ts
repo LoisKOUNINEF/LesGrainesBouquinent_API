@@ -7,10 +7,35 @@ import { CommentsModule } from './comments/comments.module';
 import { FavoritesModule } from './favorites/favorites.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { MailerModule } from './mailer/mailer.module';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { dataSourceOptions } from 'db/data-source';
+import { APP_GUARD } from '@nestjs/core';
+import { OwnerGuard } from './authorization/owner.guard';
+import { AdminGuard } from './authorization/admin.guard';
 
 @Module({
-  imports: [UsersModule, BooksModule, CommentsModule, FavoritesModule, AuthenticationModule, MailerModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRoot(dataSourceOptions),
+    UsersModule,
+    BooksModule,
+    CommentsModule,
+    FavoritesModule,
+    AuthenticationModule,
+    MailerModule,
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AdminGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: OwnerGuard,
+    },
+  ],
 })
 export class AppModule {}
