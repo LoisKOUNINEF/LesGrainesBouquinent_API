@@ -20,6 +20,10 @@ export class User {
   id: string;
 
   @Column({ unique: true })
+  @ApiProperty()
+  name: string;
+
+  @Column({ unique: true })
   @IsEmail()
   @ApiProperty()
   email: string;

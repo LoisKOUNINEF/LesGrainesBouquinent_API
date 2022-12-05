@@ -33,11 +33,18 @@ export class UsersService {
     });
   }
 
+  findOneByName(name: string): Promise<User> {
+    return this.usersRepository.findOne({
+      where: { name: name },
+    });
+  }
+
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const user = await this.findOneByEmail(createUserDto.email);
-    if (user) {
+    const userEmail = await this.findOneByEmail(createUserDto.email);
+    const userName = await this.findOneByName(createUserDto.name);
+    if (userEmail || userName) {
       throw new ForbiddenException({
-        msg: 'User with this email already exists',
+        msg: 'User with this email or name already exists',
       });
     }
     const newUser = this.usersRepository.create(createUserDto);
