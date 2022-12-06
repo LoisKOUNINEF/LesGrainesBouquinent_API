@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { User } from 'src/users/entities/user.entity';
 
 export class CreateBookDto {
   @ApiProperty()
@@ -9,4 +10,7 @@ export class CreateBookDto {
 
   @ApiProperty()
   author: string;
+
+  @ApiProperty()
+  user: User;
 }

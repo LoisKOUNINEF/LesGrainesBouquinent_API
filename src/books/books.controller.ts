@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Query,
+  Request,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -30,7 +31,7 @@ export class BooksController {
   @ApiCreatedResponse({ type: Book, description: 'create a new Book entry.' })
   @ApiBadRequestResponse()
   @Post()
-  create(@Body() createBookDto: CreateBookDto) {
+  create(@Request() req, @Body() createBookDto: CreateBookDto) {
     return this.booksService.create(createBookDto);
   }
 
@@ -43,13 +44,16 @@ export class BooksController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<Book> {
     return this.booksService.findOne(id);
   }
 
   @Owner(true)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateBookDto: UpdateBookDto,
+  ): Promise<Book> {
     return this.booksService.update(id, updateBookDto);
   }
 
