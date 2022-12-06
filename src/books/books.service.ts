@@ -30,6 +30,7 @@ export class BooksService {
         } || { author: `%${author}%` },
       });
     }
+    return this.booksRepository.find();
   }
 
   findOne(id: string) {

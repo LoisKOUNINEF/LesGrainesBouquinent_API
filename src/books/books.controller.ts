@@ -32,7 +32,7 @@ export class BooksController {
   @ApiBadRequestResponse()
   @Post()
   create(@Request() req, @Body() createBookDto: CreateBookDto) {
-    return this.booksService.create(createBookDto);
+    return this.booksService.create(req.user.id, createBookDto);
   }
 
   @Get()
