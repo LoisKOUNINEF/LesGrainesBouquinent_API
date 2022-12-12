@@ -37,6 +37,7 @@ export class Book {
   @UpdateDateColumn({ type: 'timestamptz' })
   updatedAt!: Date;
 
+  @ApiProperty({ type: () => User })
   @ManyToOne(() => User, (user) => user.books, {
     onDelete: 'SET NULL',
   })
