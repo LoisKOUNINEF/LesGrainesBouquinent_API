@@ -12,6 +12,7 @@ import { dataSourceOptions } from 'db/data-source';
 import { APP_GUARD } from '@nestjs/core';
 import { OwnerGuard } from './authorization/owner.guard';
 import { AdminGuard } from './authorization/admin.guard';
+import { PasswordResetModule } from './password-reset/password-reset.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { AdminGuard } from './authorization/admin.guard';
     CommentsModule,
     AuthenticationModule,
     MailerModule,
+    PasswordResetModule,
   ],
   controllers: [AppController],
   providers: [
