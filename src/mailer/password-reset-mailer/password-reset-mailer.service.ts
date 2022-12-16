@@ -15,7 +15,7 @@ export class PasswordResetMailerService {
   public async sendResetLink(pwdReset: PasswordReset) {
     const emailTemplate = fs
       .readFileSync(
-        './dist/src/mailer/usermailer/password-reset-mailer/password-reset-mailer.hbs',
+        './dist/src/mailer/password-reset-mailer/password-reset-mailer.hbs',
       )
       .toString();
 

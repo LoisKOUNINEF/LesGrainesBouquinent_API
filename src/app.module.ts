@@ -11,6 +11,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { OwnerGuard } from './authorization/owner.guard';
 import { AdminGuard } from './authorization/admin.guard';
 import { CommentsModule } from './comments/comments.module';
+import { PasswordResetModule } from './password-reset/password-reset.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CommentsModule } from './comments/comments.module';
     BooksModule,
     CommentsModule,
     AuthenticationModule,
+    PasswordResetModule,
   ],
   controllers: [AppController],
   providers: [
