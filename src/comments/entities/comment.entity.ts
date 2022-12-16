@@ -7,7 +7,6 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -15,8 +14,10 @@ import {
 @Entity()
 export class Comment {
   @PrimaryGeneratedColumn('uuid')
+  @ApiProperty()
   id: string;
 
+  @ApiProperty()
   @Column('text')
   content: string;
 
@@ -39,16 +40,4 @@ export class Comment {
   })
   @JoinColumn()
   user: User;
-
-  @ApiProperty({ type: () => Comment })
-  @ManyToOne(() => Comment, (comment) => comment.childComments, {
-    onDelete: 'SET NULL',
-  })
-  @JoinColumn()
-  parentComment: Comment;
-
-  @OneToMany(() => Comment, (comment) => comment.parentComment, {
-    cascade: true,
-  })
-  childComments: Comment[];
 }

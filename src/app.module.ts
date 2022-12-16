@@ -3,16 +3,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { BooksModule } from './books/books.module';
-import { CommentsModule } from './comments/comments.module';
 import { AuthenticationModule } from './authentication/authentication.module';
-import { MailerModule } from './mailer/mailer.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from 'db/data-source';
 import { APP_GUARD } from '@nestjs/core';
 import { OwnerGuard } from './authorization/owner.guard';
 import { AdminGuard } from './authorization/admin.guard';
-import { PasswordResetModule } from './password-reset/password-reset.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -22,8 +20,6 @@ import { PasswordResetModule } from './password-reset/password-reset.module';
     BooksModule,
     CommentsModule,
     AuthenticationModule,
-    MailerModule,
-    PasswordResetModule,
   ],
   controllers: [AppController],
   providers: [

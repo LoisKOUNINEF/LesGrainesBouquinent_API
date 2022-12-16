@@ -44,6 +44,7 @@ export class Book {
   @JoinColumn()
   user: User;
 
+  @ApiProperty({ type: () => Comment })
   @OneToMany(() => Comment, (comment) => comment.book, {
     cascade: true,
   })

@@ -44,13 +44,13 @@ export class User {
   @UpdateDateColumn({ type: 'timestamptz' })
   updatedAt!: Date;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => Book })
   @OneToMany(() => Book, (book) => book.user, {
     cascade: true,
   })
   books: Book[];
 
-  @ApiProperty()
+  @ApiProperty({ type: () => Comment })
   @OneToMany(() => Comment, (comment) => comment.user, {
     cascade: true,
   })

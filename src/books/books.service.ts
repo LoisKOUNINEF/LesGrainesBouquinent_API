@@ -38,6 +38,7 @@ export class BooksService {
       where: { id: id },
       relations: {
         comments: true,
+        user: true,
       },
     });
   }
