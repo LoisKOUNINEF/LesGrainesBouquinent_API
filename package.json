@@ -26,6 +26,7 @@
     "migration:revert": "npm run typeorm -- migration:revert"
   },
   "dependencies": {
+    "@golevelup/ts-jest": "^0.3.5",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
@@ -82,7 +83,14 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "rootDir": "./",
+    "modulePaths": [
+      "<rootDir>"
+    ],
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"

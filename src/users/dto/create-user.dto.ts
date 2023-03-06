@@ -14,5 +14,5 @@ export class CreateUserDto {
   password: string;
 
   @ApiProperty()
-  isAdmin: boolean;
+  isAdmin?: boolean;
 }
