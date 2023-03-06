@@ -1,11 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { CommonEntity } from 'common/entities/common.entity';
+import { Column, Entity } from 'typeorm';
 
 @Entity()
-export class PasswordReset {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class PasswordReset extends CommonEntity {
   @ApiProperty()
   @Column()
   email: string;

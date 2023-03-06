@@ -1,31 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { CommonEntity } from 'common/entities/common.entity';
 import { Book } from 'src/books/entities/book.entity';
 import { User } from 'src/users/entities/user.entity';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity()
-export class Comment {
-  @PrimaryGeneratedColumn('uuid')
-  @ApiProperty()
-  id: string;
-
+export class Comment extends CommonEntity {
   @ApiProperty()
   @Column('text')
   content: string;
-
-  @CreateDateColumn({ type: 'timestamptz' })
-  createdAt!: Date;
-
-  @UpdateDateColumn({ type: 'timestamptz' })
-  updatedAt!: Date;
 
   @ApiProperty({ type: () => Book })
   @ManyToOne(() => Book, (book) => book.comments, {

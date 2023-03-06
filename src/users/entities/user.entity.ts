@@ -1,24 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  BeforeInsert,
-  BeforeUpdate,
-  Column,
-  CreateDateColumn,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { IsEmail, MinLength } from 'class-validator';
 import { Book } from 'src/books/entities/book.entity';
 import { Comment } from 'src/comments/entities/comment.entity';
+import { CommonEntity } from 'common/entities/common.entity';
 
 @Entity()
-export class User {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class User extends CommonEntity {
   @Column({ unique: true })
   @ApiProperty()
   name: string;
@@ -36,14 +25,6 @@ export class User {
   @Column({ default: false })
   @ApiProperty()
   isAdmin: boolean;
-
-  @ApiProperty()
-  @CreateDateColumn({ type: 'timestamptz' })
-  createdAt!: Date;
-
-  @ApiProperty()
-  @UpdateDateColumn({ type: 'timestamptz' })
-  updatedAt!: Date;
 
   @ApiProperty({ type: () => Book })
   @OneToMany(() => Book, (book) => book.user, {
