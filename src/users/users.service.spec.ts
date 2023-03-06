@@ -21,9 +21,9 @@ describe('UsersService', () => {
     password: 'testing1234',
   };
   const user = {
-    id: 'randomString',
-    name: 'randomName',
-    email: 'nobody@yopmail.com',
+    id: 'randomString1',
+    name: 'randomName1',
+    email: 'nobody1@yopmail.com',
     password: '12345678',
   };
   const usersRepositoryMock: MockType<Repository<User>> = {
