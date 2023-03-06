@@ -135,4 +135,12 @@ describe('UsersService', () => {
       );
     });
   });
+
+  describe('remove', () => {
+    it('should delete designated user', async () => {
+      const deletedUser = await service.remove(newUser.id);
+      expect(deletedUser).toBeUndefined();
+      expect(usersRepositoryMock.remove).toHaveBeenCalled();
+    });
+  });
 });
