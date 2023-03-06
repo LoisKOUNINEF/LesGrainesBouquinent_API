@@ -121,4 +121,18 @@ describe('UsersService', () => {
       });
     });
   });
+
+  describe('update', () => {
+    it('should update designated user', async () => {
+      const updateUserInput = {
+        name: 'updatedName',
+      };
+      const updatedUser = await service.update(newUser.id, updateUserInput);
+      expect(updatedUser).toMatchObject(updateUserInput);
+      expect(updatedUser).not.toMatchObject(newUser);
+      expect(usersRepositoryMock.save).toHaveBeenCalledWith(
+        Object.assign(newUser, updateUserInput),
+      );
+    });
+  });
 });
