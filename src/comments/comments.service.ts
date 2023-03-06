@@ -46,10 +46,11 @@ export class CommentsService {
     updateCommentDto: UpdateCommentDto,
   ): Promise<Comment> {
     const comment = await this.findOne(id);
-    return await this.commentsRepository.save({
-      ...comment,
-      ...updateCommentDto,
-    });
+    await this.commentsRepository.save(
+      Object.assign(comment, updateCommentDto),
+    );
+
+    return comment;
   }
 
   async remove(id: string) {

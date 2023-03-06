@@ -45,7 +45,8 @@ export class BooksService {
 
   async update(id: string, updateBookDto: UpdateBookDto): Promise<Book> {
     const book = await this.findOne(id);
-    return this.booksRepository.save(Object.assign(book, updateBookDto));
+    await this.booksRepository.save(Object.assign(book, updateBookDto));
+    return book;
   }
 
   async remove(id: string) {
