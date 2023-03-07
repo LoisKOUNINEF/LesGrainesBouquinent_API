@@ -1,3 +1,4 @@
+import { createMock } from '@golevelup/ts-jest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CommentsController } from './comments.controller';
 import { CommentsService } from './comments.service';
@@ -8,7 +9,12 @@ describe('CommentsController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CommentsController],
-      providers: [CommentsService],
+      providers: [
+        {
+          provide: CommentsService,
+          useValue: createMock<CommentsService>(),
+        },
+      ],
     }).compile();
 
     controller = module.get<CommentsController>(CommentsController);

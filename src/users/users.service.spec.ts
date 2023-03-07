@@ -1,16 +1,11 @@
 import { createMock } from '@golevelup/ts-jest';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { MailerModule } from 'src/mailer/mailer.module';
 import { WelcomeService } from 'src/mailer/welcome/welcome.service';
+import { MockType } from 'test/types/mock-type';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
-
-type MockType<T> = {
-  [P in keyof T]?: jest.Mock<unknown>;
-};
 
 describe('UsersService', () => {
   let service: UsersService;
