@@ -14,7 +14,7 @@ import {
   ApiCreatedResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { AuthenticatedGuard } from 'src/authentication/authenticated.guard';
+import { AuthenticatedGuard } from 'src/authentication/guards/authenticated.guard';
 import { Owner } from 'src/authorization/owner.decorator';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';

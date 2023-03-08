@@ -18,7 +18,7 @@ import {
   ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
-import { LocalAuthGuard } from 'src/authentication/local-auth.guard';
+import { LocalAuthGuard } from 'src/authentication/guards/local-auth.guard';
 import { Admin } from 'src/authorization/admin.decorator';
 import { Owner } from 'src/authorization/owner.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -68,7 +68,10 @@ export class UsersController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  login(@Request() req): any {
+  login(@Request() req, err: Error): any {
+    if (err) {
+      return err.message;
+    }
     return { msg: `User ${req.user.email} logged In.` };
   }
 

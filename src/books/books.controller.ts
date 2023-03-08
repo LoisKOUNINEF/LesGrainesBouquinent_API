@@ -15,7 +15,7 @@ import {
   ApiCreatedResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { AuthenticatedGuard } from 'src/authentication/authenticated.guard';
+import { AuthenticatedGuard } from 'src/authentication/guards/authenticated.guard';
 import { Owner } from 'src/authorization/owner.decorator';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
