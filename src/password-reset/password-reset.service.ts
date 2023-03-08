@@ -1,9 +1,10 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import {
+  noUser,
+  passwordLength,
+  tokenNotFound,
+} from 'common/exceptions/password-reset.exceptions';
 import { PasswordResetMailerService } from 'src/mailer/password-reset-mailer/password-reset-mailer.service';
 import { User } from 'src/users/entities/user.entity';
 import { UsersService } from 'src/users/users.service';
@@ -22,7 +23,7 @@ export class PasswordResetService {
   async create(email: string): Promise<any> {
     const user = this.usersService.findOneByEmail(email);
     if (!user) {
-      throw new BadRequestException({ msg: 'No User with this email.' });
+      noUser();
     }
 
     const alreadyExists = await this.findOneByEmail(email);
@@ -38,15 +39,13 @@ export class PasswordResetService {
 
   async reset(id: string, password: string): Promise<User> {
     if (password.length < 10) {
-      throw new BadRequestException({
-        msg: 'Password must be at least 10 characters',
-      });
+      passwordLength();
     }
 
     const pwdReset = await this.findOne(id);
 
     if (!pwdReset) {
-      throw new NotFoundException({ msg: 'not found.' });
+      tokenNotFound();
     }
 
     const user = await this.usersService.findOneByEmail(pwdReset.email);

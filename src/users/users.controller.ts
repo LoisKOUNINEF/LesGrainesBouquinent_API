@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  NotFoundException,
   Param,
   Patch,
   Post,
@@ -45,12 +44,7 @@ export class UsersController {
   @Get(':id')
   @Owner(true)
   getUserById(@Param('id') id: string): Promise<User> {
-    const user = this.usersService.findOne(id);
-    if (!user) {
-      throw new NotFoundException();
-    }
-
-    return user;
+    return this.usersService.findOne(id);
   }
 
   @ApiCreatedResponse({ type: User, description: 'create new user' })

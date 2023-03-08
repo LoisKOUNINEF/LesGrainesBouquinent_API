@@ -5,7 +5,10 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { alreadyExists, notFound } from 'common/exceptions/user.exceptions';
+import {
+  userAlreadyExists,
+  userNotFound,
+} from 'common/exceptions/user.exceptions';
 
 @Injectable()
 export class UsersService {
@@ -28,7 +31,7 @@ export class UsersService {
     });
 
     if (!user) {
-      notFound();
+      userNotFound();
     }
     return user;
   }
@@ -38,7 +41,7 @@ export class UsersService {
       where: { email: email },
     });
     if (!user) {
-      notFound();
+      userNotFound();
     }
     return user;
   }
@@ -48,7 +51,7 @@ export class UsersService {
       where: { name: name },
     });
     if (!user) {
-      notFound();
+      userNotFound();
     }
     return user;
   }
@@ -57,7 +60,7 @@ export class UsersService {
     const userEmail = await this.findOneByEmail(createUserDto.email);
     const userName = await this.findOneByName(createUserDto.name);
     if (userEmail || userName) {
-      alreadyExists();
+      userAlreadyExists();
     }
     const newUser = this.usersRepository.create(createUserDto);
 
@@ -69,7 +72,7 @@ export class UsersService {
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.findOne(id);
     if (!user) {
-      notFound();
+      userNotFound();
     }
 
     await this.usersRepository.save(Object.assign(user, updateUserDto));
@@ -80,7 +83,7 @@ export class UsersService {
   async remove(id: string): Promise<User> {
     const user = await this.findOne(id);
     if (!user) {
-      notFound();
+      userNotFound();
     }
 
     return await this.usersRepository.remove(user);

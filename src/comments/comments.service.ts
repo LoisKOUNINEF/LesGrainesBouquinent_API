@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Comment } from './entities/comment.entity';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
+import { commentNotFound } from 'common/exceptions/comments.exceptions';
 
 @Injectable()
 export class CommentsService {
@@ -32,13 +33,19 @@ export class CommentsService {
   }
 
   async findOne(id: string) {
-    return await this.commentsRepository.findOne({
+    const comment = await this.commentsRepository.findOne({
       where: { id: id },
       relations: {
         user: true,
         book: true,
       },
     });
+
+    if (!comment) {
+      commentNotFound();
+    }
+
+    return comment;
   }
 
   async update(
@@ -46,6 +53,7 @@ export class CommentsService {
     updateCommentDto: UpdateCommentDto,
   ): Promise<Comment> {
     const comment = await this.findOne(id);
+
     await this.commentsRepository.save(
       Object.assign(comment, updateCommentDto),
     );

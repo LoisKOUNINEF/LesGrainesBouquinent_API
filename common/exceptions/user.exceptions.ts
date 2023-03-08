@@ -1,12 +1,12 @@
 import { ForbiddenException, NotFoundException } from '@nestjs/common';
 
-export function notFound() {
+export function userNotFound() {
   throw new NotFoundException({
     msg: 'User not found.',
   });
 }
 
-export function alreadyExists() {
+export function userAlreadyExists() {
   throw new ForbiddenException({
     msg: 'User with this email or name already exists',
   });

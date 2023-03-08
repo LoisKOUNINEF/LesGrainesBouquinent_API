@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { bookNotFound } from 'common/exceptions/books.exceptions';
 import { UsersService } from 'src/users/users.service';
 import { ILike, Repository } from 'typeorm';
 import { CreateBookDto } from './dto/create-book.dto';
@@ -33,14 +34,20 @@ export class BooksService {
     return this.booksRepository.find();
   }
 
-  findOne(id: string) {
-    return this.booksRepository.findOne({
+  findOne(id: string): Promise<Book> {
+    const book = this.booksRepository.findOne({
       where: { id: id },
       relations: {
         comments: true,
         user: true,
       },
     });
+
+    if (!book) {
+      bookNotFound();
+    }
+
+    return book;
   }
 
   async update(id: string, updateBookDto: UpdateBookDto): Promise<Book> {
@@ -51,6 +58,11 @@ export class BooksService {
 
   async remove(id: string) {
     const book = await this.findOne(id);
+
+    if (!book) {
+      bookNotFound();
+    }
+
     return this.booksRepository.remove(book);
   }
 }
