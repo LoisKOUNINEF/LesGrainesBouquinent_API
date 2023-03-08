@@ -17,10 +17,10 @@ import {
 } from '@nestjs/swagger';
 import { AuthenticatedGuard } from 'src/authentication/guards/authenticated.guard';
 import { Owner } from 'src/authorization/owner.decorator';
-import { BooksService } from './books.service';
-import { CreateBookDto } from './dto/create-book.dto';
-import { UpdateBookDto } from './dto/update-book.dto';
-import { Book } from './entities/book.entity';
+import { BooksService } from '../service/books.service';
+import { CreateBookDto } from '../dto/create-book.dto';
+import { UpdateBookDto } from '../dto/update-book.dto';
+import { Book } from '../entities/book.entity';
 
 @ApiTags('books')
 @Controller('books')

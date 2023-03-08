@@ -4,7 +4,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { WelcomeService } from 'src/mailer/welcome/welcome.service';
 import { MockType } from 'test/types/mock-type';
 import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
+import { User } from '../entities/user.entity';
 import { UsersService } from './users.service';
 
 describe('UsersService', () => {

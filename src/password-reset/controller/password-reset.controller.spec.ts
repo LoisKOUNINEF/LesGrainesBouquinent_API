@@ -1,7 +1,7 @@
 import { createMock } from '@golevelup/ts-jest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { PasswordResetController } from './password-reset.controller';
-import { PasswordResetService } from './password-reset.service';
+import { PasswordResetService } from '../service/password-reset.service';
 
 describe('PasswordResetController', () => {
   let controller: PasswordResetController;

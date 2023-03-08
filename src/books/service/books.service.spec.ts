@@ -1,29 +1,29 @@
 import { createMock } from '@golevelup/ts-jest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from 'src/users/service/users.service';
 import { MockType } from 'test/types/mock-type';
 import { Repository } from 'typeorm';
-import { CommentsService } from './comments.service';
-import { Comment } from './entities/comment.entity';
+import { BooksService } from './books.service';
+import { Book } from '../entities/book.entity';
 
-describe('CommentsService', () => {
-  let service: CommentsService;
-  const commentsRepositoryMock: MockType<Repository<Comment>> = {
+describe('BooksService', () => {
+  let service: BooksService;
+  const booksRepositoryMock: MockType<Repository<Book>> = {
     create: jest.fn(),
     save: jest.fn(),
+    remove: jest.fn(),
     find: jest.fn(),
     findOne: jest.fn(),
-    remove: jest.fn(),
   };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        CommentsService,
+        BooksService,
         {
-          provide: getRepositoryToken(Comment),
-          useValue: commentsRepositoryMock,
+          provide: getRepositoryToken(Book),
+          useValue: booksRepositoryMock,
         },
         {
           provide: UsersService,
@@ -32,7 +32,7 @@ describe('CommentsService', () => {
       ],
     }).compile();
 
-    service = module.get<CommentsService>(CommentsService);
+    service = module.get<BooksService>(BooksService);
   });
 
   it('should be defined', () => {

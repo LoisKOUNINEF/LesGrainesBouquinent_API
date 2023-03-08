@@ -1,7 +1,7 @@
 import { createMock } from '@golevelup/ts-jest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CommentsController } from './comments.controller';
-import { CommentsService } from './comments.service';
+import { CommentsService } from '../service/comments.service';
 
 describe('CommentsController', () => {
   let controller: CommentsController;

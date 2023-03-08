@@ -21,10 +21,10 @@ import {
 import { LocalAuthGuard } from 'src/authentication/guards/local-auth.guard';
 import { Admin } from 'src/authorization/admin.decorator';
 import { Owner } from 'src/authorization/owner.decorator';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity';
-import { UsersService } from './users.service';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { User } from '../entities/user.entity';
+import { UsersService } from '../service/users.service';
 
 @ApiTags('users')
 @Controller('users')

@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { WelcomeService } from 'src/mailer/welcome/welcome.service';
 import { Repository } from 'typeorm';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { User } from '../entities/user.entity';
 import {
   userAlreadyExists,
   userNotFound,
@@ -40,9 +40,7 @@ export class UsersService {
     const user = this.usersRepository.findOne({
       where: { email: email },
     });
-    if (!user) {
-      userNotFound();
-    }
+
     return user;
   }
 
@@ -50,9 +48,7 @@ export class UsersService {
     const user = this.usersRepository.findOne({
       where: { name: name },
     });
-    if (!user) {
-      userNotFound();
-    }
+
     return user;
   }
 

@@ -2,10 +2,10 @@ import { createMock } from '@golevelup/ts-jest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { PasswordResetMailerService } from 'src/mailer/password-reset-mailer/password-reset-mailer.service';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from 'src/users/service/users.service';
 import { MockType } from 'test/types/mock-type';
 import { Repository } from 'typeorm';
-import { PasswordReset } from './entities/password-reset.entity';
+import { PasswordReset } from '../entities/password-reset.entity';
 import { PasswordResetService } from './password-reset.service';
 
 describe('PasswordResetService', () => {

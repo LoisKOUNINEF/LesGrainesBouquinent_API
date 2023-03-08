@@ -7,9 +7,9 @@ import {
 } from 'common/exceptions/password-reset.exceptions';
 import { PasswordResetMailerService } from 'src/mailer/password-reset-mailer/password-reset-mailer.service';
 import { User } from 'src/users/entities/user.entity';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from 'src/users/service/users.service';
 import { Repository } from 'typeorm';
-import { PasswordReset } from './entities/password-reset.entity';
+import { PasswordReset } from '../entities/password-reset.entity';
 
 @Injectable()
 export class PasswordResetService {

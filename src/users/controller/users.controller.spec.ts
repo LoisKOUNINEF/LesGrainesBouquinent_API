@@ -1,7 +1,7 @@
 import { createMock } from '@golevelup/ts-jest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
-import { UsersService } from './users.service';
+import { UsersService } from '../service/users.service';
 
 describe('UsersController', () => {
   let controller: UsersController;

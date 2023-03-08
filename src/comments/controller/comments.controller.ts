@@ -16,10 +16,10 @@ import {
 } from '@nestjs/swagger';
 import { AuthenticatedGuard } from 'src/authentication/guards/authenticated.guard';
 import { Owner } from 'src/authorization/owner.decorator';
-import { CommentsService } from './comments.service';
-import { CreateCommentDto } from './dto/create-comment.dto';
-import { UpdateCommentDto } from './dto/update-comment.dto';
-import { Comment } from './entities/comment.entity';
+import { CommentsService } from '../service/comments.service';
+import { CreateCommentDto } from '../dto/create-comment.dto';
+import { UpdateCommentDto } from '../dto/update-comment.dto';
+import { Comment } from '../entities/comment.entity';
 
 @ApiTags('comments')
 @Controller('comments')
