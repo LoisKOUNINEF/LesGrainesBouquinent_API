@@ -6,19 +6,28 @@ export class OwnerGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
-    const ownerCheck = this.reflector.getAllAndOverride<boolean>('owner', [
+    const ownerIdCheck = this.reflector.getAllAndOverride<boolean>('ownerId', [
       context.getHandler(),
       context.getClass(),
     ]);
 
-    if (!ownerCheck) {
+    if (!ownerIdCheck) {
       return true;
     }
 
     const request = context.switchToHttp().getRequest();
-    const owner = request.params;
 
-    if (request.user.isAdmin || request.user.id === owner.id) {
+    if (!request.user) {
+      return false;
+    }
+
+    const owner = request.query;
+
+    if (
+      request.user.isAdmin ||
+      request.user.email === owner.email ||
+      request.user.id === owner.id
+    ) {
       return true;
     }
     return false;
