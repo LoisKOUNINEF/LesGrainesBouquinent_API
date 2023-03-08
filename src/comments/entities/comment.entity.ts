@@ -12,14 +12,14 @@ export class Comment extends CommonEntity {
 
   @ApiProperty({ type: () => Book })
   @ManyToOne(() => Book, (book) => book.comments, {
-    onDelete: 'SET NULL',
+    onDelete: 'CASCADE',
   })
   @JoinColumn()
   book: Book;
 
   @ApiProperty({ type: () => User })
   @ManyToOne(() => User, (user) => user.comments, {
-    onDelete: 'SET NULL',
+    onDelete: 'CASCADE',
   })
   @JoinColumn()
   user: User;
