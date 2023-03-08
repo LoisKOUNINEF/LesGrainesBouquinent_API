@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { alreadyExists, notFound } from './exceptions/user.exceptions';
+import { alreadyExists, notFound } from 'common/exceptions/user.exceptions';
 
 @Injectable()
 export class UsersService {
