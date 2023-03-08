@@ -55,7 +55,7 @@ export class UsersController {
   }
 
   @Patch(':id')
-  @Admin(true)
+  @Owner(true)
   update(@Param('id') id: string, @Body() body: UpdateUserDto): Promise<User> {
     return this.usersService.update(id, body);
   }
