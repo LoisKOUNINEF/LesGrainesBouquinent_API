@@ -35,13 +35,18 @@ async function bootstrap() {
       secret: process.env.SESSION_SECRET,
       resave: false,
       saveUninitialized: false,
-      cookie: {
-        sameSite: 'none',
-        secure: true,
-        httpOnly: false,
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-        // domain: 'domainName.fr' || null,
-      },
+      cookie:
+        process.env.NODE_ENV === 'production'
+          ? {
+              sameSite: 'none',
+              secure: true,
+              httpOnly: false,
+              maxAge: 30 * 24 * 60 * 60 * 1000,
+              // domain: 'domainName.fr' || null,
+            }
+          : {
+              maxAge: 30 * 24 * 60 * 60 * 1000,
+            },
     }),
   );
 
