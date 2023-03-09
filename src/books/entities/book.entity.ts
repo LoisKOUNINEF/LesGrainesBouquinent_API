@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { CommonEntity } from 'common/entities/common.entity';
 import { Comment } from 'src/comments/entities/comment.entity';
 import { User } from 'src/users/entities/user.entity';
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, RelationId } from 'typeorm';
 
 @Entity()
 export class Book extends CommonEntity {
@@ -30,4 +30,7 @@ export class Book extends CommonEntity {
     cascade: true,
   })
   comments: Comment[];
+
+  @RelationId((self: Book) => self.user)
+  readonly userId: User['id'];
 }
