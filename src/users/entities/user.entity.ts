@@ -27,9 +27,7 @@ export class User extends CommonEntity {
   isAdmin: boolean;
 
   @ApiProperty({ type: () => Book })
-  @OneToMany(() => Book, (book) => book.user, {
-    cascade: true,
-  })
+  @OneToMany(() => Book, (book) => book.user)
   books: Book[];
 
   @ApiProperty({ type: () => Comment })

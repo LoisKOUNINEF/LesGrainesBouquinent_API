@@ -25,7 +25,8 @@ export class Book extends CommonEntity {
 
   @ApiProperty({ type: () => User })
   @ManyToOne(() => User, (user) => user.books, {
-    onDelete: 'CASCADE',
+    onDelete: 'SET NULL',
+    nullable: true,
   })
   @JoinColumn()
   user: User;
