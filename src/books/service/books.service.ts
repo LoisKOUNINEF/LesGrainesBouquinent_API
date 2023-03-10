@@ -18,9 +18,7 @@ export class BooksService {
 
   async create(userId: string, createBookDto: CreateBookDto): Promise<Book> {
     const user = await this.usersService.findOne(userId);
-    const pictureUrl = await this.pictureService.fetchImage(
-      createBookDto,
-    );
+    const pictureUrl = await this.pictureService.fetchImage(createBookDto);
     const newBook = this.booksRepository.create({
       user,
       pictureUrl,
