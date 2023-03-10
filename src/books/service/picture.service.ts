@@ -10,8 +10,8 @@ export class PictureService {
       `https://www.googleapis.com/books/v1/volumes?q=${bookTitleForSearch}+inauthor:${book.author}`,
     ).then((response) => response.json());
 
-    if (!apiResponse.items[0].volumeInfo.imageLinks) {
-      return 'default url';
+    if (!apiResponse.items || !apiResponse.items[0].volumeInfo.imageLinks) {
+      return 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
     }
 
     const thumbnailUrl = apiResponse.items[0].volumeInfo.imageLinks.thumbnail;
