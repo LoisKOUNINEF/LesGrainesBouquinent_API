@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { BooksService } from './books.service';
 import { Book } from '../entities/book.entity';
 import { User } from 'src/users/entities/user.entity';
+import { PictureService } from './picture.service';
 
 describe('BooksService', () => {
   let service: BooksService;
@@ -29,6 +30,10 @@ describe('BooksService', () => {
         {
           provide: UsersService,
           useValue: createMock<UsersService>(),
+        },
+        {
+          provide: PictureService,
+          useValue: createMock<PictureService>(),
         },
       ],
     }).compile();

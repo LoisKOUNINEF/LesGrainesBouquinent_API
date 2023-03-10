@@ -6,6 +6,7 @@ import { MockType } from 'test/types/mock-type';
 import { Repository } from 'typeorm';
 import { CommentsService } from './comments.service';
 import { Comment } from '../entities/comment.entity';
+import { BooksService } from 'src/books/service/books.service';
 
 describe('CommentsService', () => {
   let service: CommentsService;
@@ -28,6 +29,10 @@ describe('CommentsService', () => {
         {
           provide: UsersService,
           useValue: createMock<UsersService>(),
+        },
+        {
+          provide: BooksService,
+          useValue: createMock<BooksService>(),
         },
       ],
     }).compile();
