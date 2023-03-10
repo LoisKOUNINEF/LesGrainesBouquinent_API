@@ -35,7 +35,9 @@ export class BooksService {
           title: ILike(
             `%${title.normalize('NFD').replace(/[\u0300-\u036f]/g, '')}%`,
           ),
-        } || { author: `%${author}%` },
+        } || {
+          author: `%${author}%`,
+        },
       });
     }
     return this.booksRepository.find();
@@ -65,10 +67,6 @@ export class BooksService {
 
   async remove(id: string) {
     const book = await this.findOne(id);
-
-    if (!book) {
-      bookNotFound();
-    }
 
     return this.booksRepository.remove(book);
   }
