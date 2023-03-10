@@ -6,6 +6,7 @@ import { MockType } from 'test/types/mock-type';
 import { Repository } from 'typeorm';
 import { BooksService } from './books.service';
 import { Book } from '../entities/book.entity';
+import { User } from 'src/users/entities/user.entity';
 
 describe('BooksService', () => {
   let service: BooksService;

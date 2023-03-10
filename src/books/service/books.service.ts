@@ -6,17 +6,26 @@ import { ILike, Repository } from 'typeorm';
 import { CreateBookDto } from '../dto/create-book.dto';
 import { UpdateBookDto } from '../dto/update-book.dto';
 import { Book } from '../entities/book.entity';
+import { PictureService } from './picture.service';
 
 @Injectable()
 export class BooksService {
   constructor(
     @InjectRepository(Book) private booksRepository: Repository<Book>,
     private usersService: UsersService,
+    private pictureService: PictureService,
   ) {}
 
   async create(userId: string, createBookDto: CreateBookDto): Promise<Book> {
     const user = await this.usersService.findOne(userId);
-    const newBook = this.booksRepository.create({ user, ...createBookDto });
+    const pictureUrl = await this.pictureService.fetchImage(
+      createBookDto,
+    );
+    const newBook = this.booksRepository.create({
+      user,
+      pictureUrl,
+      ...createBookDto,
+    });
 
     return await this.booksRepository.save(newBook);
   }

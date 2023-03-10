@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsUrl } from 'class-validator';
 import { CommonEntity } from 'common/entities/common.entity';
 import { Comment } from 'src/comments/entities/comment.entity';
 import { User } from 'src/users/entities/user.entity';
@@ -17,6 +18,10 @@ export class Book extends CommonEntity {
   @Column({ type: 'text' })
   @ApiProperty()
   description: string;
+
+  @Column({ nullable: true })
+  @IsUrl()
+  pictureUrl: string;
 
   @ApiProperty({ type: () => User })
   @ManyToOne(() => User, (user) => user.books, {
