@@ -72,7 +72,7 @@ export class UsersController {
     if (err) {
       return err.message;
     }
-    return { msg: `User ${req.user.email} logged In.` };
+    return req.user;
   }
 
   @Post('logout')
